@@ -1,0 +1,11 @@
+*{
+  font-family: "Rubik", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+
+html, body, #root, .app{
+  height: 100%;
+  width: 100%;
+}
