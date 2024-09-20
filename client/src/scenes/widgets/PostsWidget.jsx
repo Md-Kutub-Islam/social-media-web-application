@@ -12,7 +12,7 @@ const PostsWidget = ({ userId, isProfile = false }) => {
   console.log("posts deatails:", posts);
 
   const getPosts = async () => {
-    const response = await fetch("http://localhost:3001/posts", {
+    const response = await fetch(`${process.env.BASEURL}/posts`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     });
@@ -22,7 +22,7 @@ const PostsWidget = ({ userId, isProfile = false }) => {
 
   const getUserPosts = async () => {
     const response = await fetch(
-      `http://localhost:3001/posts/${userId}/posts`,
+      `${process.env.BASEURL}/posts/${userId}/posts`,
       {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` },
@@ -32,7 +32,6 @@ const PostsWidget = ({ userId, isProfile = false }) => {
     dispatch(setPosts({ posts: data }));
   };
 
-
   useEffect(() => {
     if (isProfile) {
       getUserPosts();
@@ -41,35 +40,40 @@ const PostsWidget = ({ userId, isProfile = false }) => {
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  if (!posts) {
+    return <div>hello</div>;
+  }
+
   return (
     <>
-      { posts && posts.map(
-        ({
-          _id,
-          userId,
-          firstName,
-          lastName,
-          description,
-          stream,
-          picturePath,
-          userPicturePath,
-          likes,
-          comments,
-        }) => (
+      {posts &&
+        posts?.map(
+          ({
+            _id,
+            userId,
+            firstName,
+            lastName,
+            description,
+            stream,
+            picturePath,
+            userPicturePath,
+            likes,
+            comments,
+          }) => (
             <PostWidget
-            key={_id}
-            postId={_id}
-            postUserId={userId}
-            name={`${firstName} ${lastName}`}
-            description={description}
-            stream={stream}
-            picturePath={picturePath}
-            userPicturePath={userPicturePath}
-            likes={likes}
-            comments={comments}
-          />
-        )
-      )}
+              key={_id}
+              postId={_id}
+              postUserId={userId}
+              name={`${firstName} ${lastName}`}
+              description={description}
+              stream={stream}
+              picturePath={picturePath}
+              userPicturePath={userPicturePath}
+              likes={likes}
+              comments={comments}
+            />
+          )
+        )}
     </>
   );
 };

@@ -80,11 +80,13 @@ const Form = () => {
   };
 
   const login = async (values, onSubmitProps) => {
-    const loggedInResponse = await fetch("http://localhost:3001/auth/login", {
+    const loggedInResponse = await fetch(`${process.env.BASEURL}/auth/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(values),
     });
+    console.log("BASEURL:", process.env.BASEURL);
+
     const loggedIn = await loggedInResponse.json();
     onSubmitProps.resetForm();
     if (loggedIn) {

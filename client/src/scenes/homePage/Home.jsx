@@ -20,27 +20,6 @@ function Home() {
       {/* Navber  */}
       <Navbar />
 
-      <Box display="flex" justifyContent="center" pt="1.1rem">
-        <Link
-          to="http://127.0.0.1:5500/Collage-resource-finder/index.html"
-          style={{ textDecoration: "none" }}
-        >
-          <Typography
-            variant="h4"
-            color={dark}
-            fontWeight="500"
-            sx={{
-              "&:hover": {
-                color: palette.primary.light,
-                cursor: "pointer",
-              },
-            }}
-          >
-            Education Resources
-          </Typography>
-        </Link>
-      </Box>
-
       {/* my post   */}
       <Box
         width="100%"

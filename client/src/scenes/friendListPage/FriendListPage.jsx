@@ -6,8 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setFriend } from "../../state";
 import Navbar from "../navbar/Navbar";
 
-
-function FriendListPage({userId}) {
+function FriendListPage({ userId }) {
   const dispatch = useDispatch();
   const { palette } = useTheme();
   const token = useSelector((state) => state.token);
@@ -15,7 +14,7 @@ function FriendListPage({userId}) {
 
   const getFriends = async () => {
     const response = await fetch(
-      `http://localhost:3001/users/${userId}/friends`,
+      `${process.env.BASEURL}/users/${userId}/friends`,
       {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` },
@@ -27,34 +26,35 @@ function FriendListPage({userId}) {
 
   useEffect(() => {
     getFriends();
-  }, []); 
-  
+  }, []);
+
   return (
     <>
-    <Navbar />
-    <WidgetWrapper width="60%" margin="auto" mt="2rem">
-      <Typography
-        color={palette.neutral.dark}
-        variant="h5"
-        fontWeight="500"
-        sx={{ mb: "1.5rem" }}
-      >
-        Friend List
-      </Typography>
-      <Box display="flex" flexDirection="column" gap="1.5rem">
-        {friends && friends.map((friend) => (
-          <Friend
-            key={friend._id}
-            friendId={friend._id}
-            name={`${friend.firstName} ${friend.lastName}`}
-            subtitle={friend.stream}
-            userPicturePath={friend.picturePath}
-          />
-        ))}
-      </Box>
-    </WidgetWrapper>
+      <Navbar />
+      <WidgetWrapper width="60%" margin="auto" mt="2rem">
+        <Typography
+          color={palette.neutral.dark}
+          variant="h5"
+          fontWeight="500"
+          sx={{ mb: "1.5rem" }}
+        >
+          Friend List
+        </Typography>
+        <Box display="flex" flexDirection="column" gap="1.5rem">
+          {friends &&
+            friends.map((friend) => (
+              <Friend
+                key={friend._id}
+                friendId={friend._id}
+                name={`${friend.firstName} ${friend.lastName}`}
+                subtitle={friend.stream}
+                userPicturePath={friend.picturePath}
+              />
+            ))}
+        </Box>
+      </WidgetWrapper>
     </>
-  )
+  );
 }
 
-export default FriendListPage
+export default FriendListPage;

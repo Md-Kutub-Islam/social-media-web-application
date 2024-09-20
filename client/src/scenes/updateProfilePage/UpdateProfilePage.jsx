@@ -49,7 +49,7 @@ function UpdateProfilePage() {
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
   const update = async (values, onsubmitProps) => {
-    const response = await fetch(`http://localhost:3001/users/${id}/update`, {
+    const response = await fetch(`${process.env.BASEURL}/users/${id}/update`, {
       method: "PUT",
       headers: {
         Authorization: `Bearer ${token}`,
