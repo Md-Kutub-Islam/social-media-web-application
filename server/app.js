@@ -29,13 +29,7 @@ app.use(morgan("common"));
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 
 // middlewares
-// app.use(
-//   cors({
-//     origin: process.env.FRONTEND_URL || "http://localhost:5173",
-//     credentials: true,
-//   })
-// );
-const allowedOrigins = [process.env.FRONTEND_URL || "http://localhost:5173", "https://social-media-web-application-kjg6.onrender.com"];
+const allowedOrigins = [process.env.FRONTEND_URL || "https://social-media-cf4k.onrender.com", "https://social-media-web-application-kjg6.onrender.com"];
 
 app.use(
   cors({
