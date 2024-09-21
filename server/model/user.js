@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import bcrypt from "bcrypt"
+import bcrypt from 'bcryptjs';  // Instead of 'bcrypt'
 import jwt from "jsonwebtoken"
 import cypto from "crypto"
 
